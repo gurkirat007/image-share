@@ -44,15 +44,18 @@ def signup_post():
 	email = request.form.get('email')
 	name = request.form.get('name')
 	password = request.form.get('password')
+	gender = request.form.get('gender')
 	# check if email exist
 	user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 	if user: #if already one is there redirect to signup page
 		flash('Email address already exists')
 		return redirect(url_for('auth.signup'))
 	# if new user adding the new user to database after hashing the passwords
-	new_user = User(email=email, name=name, password = generate_password_hash(password, method='sha256'))
+	new_user = User(email=email, name=name, password = generate_password_hash(password, method='sha256'), gender=gender)
 	db.session.add(new_user)
 	db.session.commit()
+	# new_profile = Profile(user_id = new_user.id, profile_pic = , bio = "Pls write your Bio")
+
 	return redirect(url_for('auth.login'))
 
 
