@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
-from .models import User
+from .models import User, Profile
 from . import db
 
 
@@ -54,7 +54,11 @@ def signup_post():
 	new_user = User(email=email, name=name, password = generate_password_hash(password, method='sha256'), gender=gender)
 	db.session.add(new_user)
 	db.session.commit()
-	# new_profile = Profile(user_id = new_user.id, profile_pic = , bio = "Pls write your Bio")
+	name_default_profile_pic = "img/default_{}.png".format(gender)
+	# add id to profile table
+	new_profile = Profile(user_id = new_user.id, profile_pic_name = name_default_profile_pic, bio = "Pls write your Bio")
+	db.session.add(new_profile)
+	db.session.commit()
 
 	return redirect(url_for('auth.login'))
 

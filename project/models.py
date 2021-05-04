@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from . import db
 
+
 class User(UserMixin, db.Model):
 	__tablename__="user"
 	id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
@@ -12,5 +13,5 @@ class User(UserMixin, db.Model):
 class Profile(db.Model):
 	__tablename__="profile"
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key = True)
-	profile_pic = db.Column(db.LargeBinary)
+	profile_pic_name = db.Column(db.String)
 	bio = db.Column(db.String)
