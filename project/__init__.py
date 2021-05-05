@@ -8,7 +8,9 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config['UPLOAD_FOLDER'] = '/home/destroyer-007/cs50_projects/flask-login/project/static/uploaded_images/profilepictures'
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
@@ -18,7 +20,7 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-
+    
     from .models import User, Profile
     
 

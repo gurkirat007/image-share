@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post" action = '/search'>
+<div class="input-group">
+  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+    aria-describedby="search-addon" name = "search"/>
+  <button type="submit" class="btn btn-outline-primary">search</button>
+</div>
+</form>
+
+
+{% for profile in profiles %}
+<div>
+	<p>{{profile.name}}</p>
+	<p>{{profile.bio}}</p>
+	<img src = "{{url_for('static', filename = 'profile.profile_pic_name')}}">
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

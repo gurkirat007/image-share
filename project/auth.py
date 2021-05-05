@@ -5,6 +5,7 @@ from .models import User, Profile
 from . import db
 
 
+
 auth = Blueprint('auth', __name__)
 
 
@@ -56,7 +57,7 @@ def signup_post():
 	db.session.commit()
 	name_default_profile_pic = "img/default_{}.png".format(gender)
 	# add id to profile table
-	new_profile = Profile(user_id = new_user.id, profile_pic_name = name_default_profile_pic, bio = "Pls write your Bio")
+	new_profile = Profile(user_id = new_user.id, name=new_user.name ,profile_pic_name = name_default_profile_pic, bio = "Pls write your Bio")
 	db.session.add(new_profile)
 	db.session.commit()
 

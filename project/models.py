@@ -13,5 +13,6 @@ class User(UserMixin, db.Model):
 class Profile(db.Model):
 	__tablename__="profile"
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key = True)
+	name = db.Column(db.String(1000))
 	profile_pic_name = db.Column(db.String)
 	bio = db.Column(db.String)
