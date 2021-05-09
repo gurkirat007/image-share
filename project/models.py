@@ -16,3 +16,9 @@ class Profile(db.Model):
 	name = db.Column(db.String(1000))
 	profile_pic_name = db.Column(db.String)
 	bio = db.Column(db.String)
+
+class Followers(db.Model):
+	__tablename__ = "followers_and_following"
+	id = db.Column(db.Integer, primary_key=True)
+	follower = db.Column(db.Integer, db.ForeignKey("user.id"))
+	following =	db.Column(db.Integer, db.ForeignKey("user.id"))

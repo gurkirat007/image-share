@@ -23,7 +23,7 @@ def index():
 @login_required
 def profile():
 	profile_page_data = Profile.query.get(current_user.id)
-	return render_template('profile.html', name = current_user.name, profile_page_data = profile_page_data)
+	return render_template('profile.html', profile_page_data = profile_page_data)
 
 
 @main.route('/editprofile')
@@ -55,13 +55,15 @@ def edit_profile():
 	return redirect(url_for('main.profile'))
 
 
-# @main.route('/search', methods = ['POST'])
-# @login_required
-# def search_page():
-# 	search = request.form.get('search')
-# 	search = "%{}%".format(search)
-# 	profiles = Profile.query.filter(Profile.name.like(search)).all()
+@main.route('/search', methods = ['GET'])
+@login_required
+def search_page():
+	search = request.args.get('search')
+	search = "%{}%".format(search)
+	profiles = Profile.query.filter(Profile.name.like(search)).all()
 
-# 	return render_template('search.html', profiles= profiles)
+	return render_template('search.html', profiles= profiles)
+
+	
 
 
