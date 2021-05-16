@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <h1 class="title">
-  Flask Login Example
+  Desi_insta
 </h1>
 <h2 class="subtitle">
-  Easy authentication and authorization in Flask.
+  Insta tera bhai banaayega
 </h2>
+
+{% if current_user.is_authenticated %}
+<p>people you follow</p>
+{% for following in followings %}
+<a href = "{{url_for('main.profile', identifier = following.user_id)}}">{{following.name}}</a>
+{% endfor %}
+<p>people who follow you</p>
+{% for follower in followers %}
+<a href = "{{url_for('main.profile', identifier = follower.user_id)}}">{{follower.name}}</a>
+{% endfor %}
+{% endif %}
 {% endblock %}

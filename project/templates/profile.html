@@ -1,3 +1,5 @@
+
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -14,5 +16,18 @@
 </p>
 
 <img src = "{{url_for('static', filename = profile_page_data.profile_pic_name)}}">
+
+{% if not current_user.id == profile_page_data.user_id %}
+	{% if status_following == True %}
+	<a href="{{url_for('main.follow_unfollow_button', profile_id = profile_page_data.user_id)}}">Following</a>
+	{% endif %}
+	{% if status_following == False %}
+	<a href="{{url_for('main.follow_unfollow_button', profile_id = profile_page_data.user_id)}}">Follow</a>
+	{% endif %}
+{% endif %}
+
+{% if current_user.id == profile_page_data.user_id %}
+<a href = "{{url_for('main.editprofile')}}">Edit Profile</a>
+{% endif %}
 
 {% endblock %}

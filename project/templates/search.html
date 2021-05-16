@@ -12,7 +12,7 @@
 
 {% for profile in profiles %}
 <div>
-	<a href = "#">{{profile.name}}</a>
+	<a href = "{{url_for('main.profile', identifier = profile.user_id)}}">{{profile.name}}</a>
 	<p>{{profile.bio}}</p>
 	<img src = "{{url_for('static', filename = profile.profile_pic_name)}}">
 </div>
